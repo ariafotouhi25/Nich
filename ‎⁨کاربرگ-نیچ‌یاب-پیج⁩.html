@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کاربرگ نیچ‌یاب پیج | تکه ۱ از ۳۰</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&family=Lalezar&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2224;
+    --teal:#11302E;
+    --teal-dark:#0B211F;
+    --saffron:#C9A24B;
+    --saffron-light:#E9CF8E;
+    --saffron-soft:#F6EEDC;
+    --paper:#F5F3EE;
+    --card:#FFFFFF;
+    --line:#E3DECF;
+    --muted:#75726A;
+    --gold-grad:linear-gradient(120deg,#B48A2F 0%,#E9CF8E 45%,#C9A24B 100%);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(900px 400px at 85% -10%, rgba(201,162,75,.16), transparent 60%),
+      linear-gradient(160deg,#152F2D 0%,#0B211F 70%,#081A18 100%);
+    color:#fff;
+    padding:44px 22px 72px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .byline{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:26px;
+  }
+  .hero .byline .name{
+    font-family:'Lalezar',cursive;
+    font-size:20px;
+    color:#fff;
+  }
+  .hero .byline .handle{
+    direction:ltr;
+    font-family:Georgia,'Times New Roman',serif;
+    font-style:italic;
+    font-size:13.5px;
+    letter-spacing:.06em;
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero .byline::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(to left,rgba(201,162,75,.55),transparent);
+    align-self:center;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:auto 0 -1px 0;
+    height:28px;
+    background:var(--paper);
+    clip-path:polygon(0 100%,100% 100%,100% 0,78% 0,74% 60%,66% 60%,62% 0,0 0);
+  }
+  .hero .piece-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(201,162,75,.10);
+    border:1px solid rgba(201,162,75,.4);
+    border-radius:100px;
+    padding:6px 16px;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--saffron-light);
+    margin-bottom:20px;
+  }
+  .hero .piece-badge svg{flex-shrink:0}
+  .hero h1{
+    font-family:'Lalezar',cursive;
+    font-size:clamp(34px,9vw,54px);
+    font-weight:400;
+    line-height:1.3;
+    margin-bottom:10px;
+  }
+  .hero h1 .accent{
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.sub{
+    font-size:15px;
+    opacity:.85;
+    max-width:520px;
+  }
+  .hero .puzzle-deco{
+    position:absolute;
+    left:-30px;
+    top:-30px;
+    opacity:.08;
+    transform:rotate(-12deg);
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px 80px}
+  section.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:30px 26px;
+    margin-top:26px;
+    position:relative;
+    box-shadow:0 1px 2px rgba(28,34,36,.03),0 10px 30px rgba(28,34,36,.05);
+  }
+  section.card.intro{margin-top:-8px}
+
+  /* layer tab */
+  .layer-tab{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .layer-tab .piece{
+    width:44px;height:44px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .layer-tab .layer-label{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.5px;
+    color:var(--teal);
+  }
+  h2{
+    font-family:'Lalezar',cursive;
+    font-weight:400;
+    font-size:26px;
+    line-height:1.4;
+    margin-bottom:4px;
+  }
+  h2 .q{color:var(--saffron)}
+  .desc{font-size:15px;color:var(--muted);margin-bottom:18px}
+  .desc b,.desc strong{color:var(--ink)}
+
+  .note{
+    background:var(--saffron-soft);
+    border-right:4px solid var(--saffron);
+    border-radius:10px;
+    padding:14px 16px;
+    font-size:14.5px;
+    margin:16px 0;
+  }
+
+  /* questions */
+  .q-block{margin-top:20px}
+  .q-title{font-weight:700;font-size:15.5px;margin-bottom:4px}
+  .q-hint{font-size:13.5px;color:var(--muted);margin-bottom:8px}
+  textarea{
+    width:100%;
+    font-family:inherit;
+    font-size:15px;
+    line-height:1.8;
+    color:var(--ink);
+    background:transparent;
+    border:none;
+    border-bottom:2px dashed var(--line);
+    padding:8px 2px 10px;
+    resize:none;
+    min-height:52px;
+    transition:border-color .2s;
+  }
+  textarea:focus{outline:none;border-bottom-color:var(--saffron)}
+  textarea::placeholder{color:#B9B2A3}
+
+  .result-line{
+    margin-top:24px;
+    background:linear-gradient(180deg,#FAF7EF,#F6F1E4);
+    border:1px solid rgba(201,162,75,.5);
+    border-radius:12px;
+    padding:16px 18px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+  }
+  .result-line .q-title{color:var(--teal-dark)}
+  .result-line textarea{border-bottom-color:rgba(201,162,75,.45);font-weight:700}
+
+  ul.diff-list{list-style:none;margin:14px 0 4px}
+  ul.diff-list li{
+    padding-right:26px;
+    position:relative;
+    margin-bottom:10px;
+    font-size:14.5px;
+  }
+  ul.diff-list li::before{
+    content:"";
+    position:absolute;
+    right:0;top:11px;
+    width:12px;height:12px;
+    background:var(--saffron);
+    border-radius:3px;
+    transform:rotate(45deg);
+  }
+  ul.diff-list b{color:var(--teal-dark)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+  .chip{
+    font-size:13px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:4px 14px;
+    color:var(--muted);
+  }
+
+  /* checkbox test */
+  .check-row{display:flex;flex-direction:column;gap:12px;margin:18px 0 6px}
+  .check-opt{
+    display:flex;align-items:center;gap:12px;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:14px 16px;
+    cursor:pointer;
+    transition:all .15s;
+    font-weight:500;
+  }
+  .check-opt:hover{border-color:var(--teal)}
+  .check-opt input{position:absolute;opacity:0}
+  .check-opt .box{
+    width:22px;height:22px;flex-shrink:0;
+    border:2px solid var(--muted);
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .15s;
+  }
+  .check-opt .box svg{opacity:0;transition:opacity .15s}
+  .check-opt.checked{border-color:var(--teal);background:#F3F1E8}
+  .check-opt.checked .box{background:var(--teal);border-color:var(--teal)}
+  .check-opt.checked .box svg{opacity:1}
+  .check-warn{
+    display:none;
+    font-size:14px;
+    background:var(--saffron-soft);
+    border-radius:10px;
+    padding:12px 16px;
+    margin-top:12px;
+  }
+  .check-warn.show{display:block}
+
+  /* ideas grid */
+  .ideas{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin-top:16px}
+  .idea{display:flex;align-items:flex-end;gap:8px}
+  .idea .n{
+    font-family:'Lalezar',cursive;
+    color:var(--saffron);
+    font-size:18px;
+    width:22px;
+    flex-shrink:0;
+    text-align:center;
+  }
+  .idea textarea{min-height:40px;font-size:14px}
+  @media(max-width:520px){.ideas{grid-template-columns:1fr}}
+
+  /* summary */
+  .summary-card{
+    background:
+      radial-gradient(700px 300px at 15% -10%, rgba(201,162,75,.14), transparent 60%),
+      linear-gradient(160deg,#152F2D 0%,#0B211F 100%);
+    color:#fff;border:none;
+  }
+  .summary-card h2{color:#fff}
+  .summary-card .desc{color:rgba(255,255,255,.75)}
+  .sentence{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;
+    padding:22px 20px;
+    font-size:16.5px;
+    line-height:2.4;
+  }
+  .sentence .lbl{
+    font-size:12px;
+    color:var(--saffron-light);
+    display:inline-block;
+    margin:0 4px;
+  }
+  .sentence input{
+    font-family:inherit;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    background:transparent;
+    border:none;
+    border-bottom:2px dashed rgba(255,255,255,.4);
+    padding:2px 6px;
+    min-width:130px;
+    width:auto;
+  }
+  .sentence input:focus{outline:none;border-bottom-color:var(--saffron)}
+  .sentence input::placeholder{color:rgba(255,255,255,.35)}
+  .example{
+    margin-top:16px;
+    font-size:13.5px;
+    color:rgba(255,255,255,.65);
+    border-right:3px solid var(--saffron);
+    padding-right:12px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    background:var(--gold-grad);
+    color:#1C2224;
+    border:none;
+    border-radius:100px;
+    padding:12px 28px;
+    cursor:pointer;
+    margin-top:20px;
+    transition:transform .12s, box-shadow .12s;
+    box-shadow:0 4px 14px rgba(201,162,75,.35);
+  }
+  .btn:hover{box-shadow:0 6px 18px rgba(201,162,75,.45)}
+  .btn:active{transform:scale(.97)}
+  .copied-msg{
+    display:none;
+    font-size:13px;
+    color:var(--saffron-light);
+    margin-top:10px;
+  }
+  .copied-msg.show{display:block}
+
+  /* outro */
+  .outro h2{color:var(--teal-dark)}
+  .outro p{font-size:15px;margin-bottom:12px}
+  .outro p b{color:var(--teal-dark)}
+
+  footer{
+    text-align:center;
+    font-size:13px;
+    color:var(--muted);
+    margin-top:40px;
+  }
+  footer .brand{
+    direction:ltr;
+    display:inline-block;
+    font-family:Georgia,'Times New Roman',serif;
+    font-style:italic;
+    letter-spacing:.06em;
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-weight:700;
+  }
+
+  /* print */
+  .print-bar{text-align:center;margin-top:26px}
+  .btn.ghost{background:transparent;border:1.5px solid var(--teal);color:var(--teal-dark)}
+  @media print{
+    .hero{padding:24px 18px 40px}
+    .print-bar,.btn{display:none!important}
+    section.card{border:1px solid #ccc;break-inside:avoid;margin-top:14px;padding:18px}
+    textarea{border-bottom:1.5px dashed #999}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="puzzle-deco" width="220" height="220" viewBox="0 0 100 100" fill="none">
+    <path d="M20 10h25c0 0-3 8 5 8s5-8 5-8h25v25c0 0-8-3-8 5s8 5 8 5v25H55c0 0 3 8-5 8s-5-8-5-8H20V45c0 0 8 3 8-5s-8-5-8-5V10z" fill="#fff"/>
+  </svg>
+  <div class="byline">
+    <span class="name">آریا فتوحی</span>
+    <span class="handle">aria.fotouhi</span>
+  </div>
+  <div class="piece-badge">
+    <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+      <path d="M20 10h25c0 0-3 8 5 8s5-8 5-8h25v25c0 0-8-3-8 5s8 5 8 5v25H55c0 0 3 8-5 8s-5-8-5-8H20V45c0 0 8 3 8-5s-8-5-8-5V10z" fill="#C9A24B"/>
+    </svg>
+    چالش ۳۰ تکه از پازل تولید محتوا · تکه ۱ از ۳۰
+  </div>
+  <h1>کاربرگ <span class="accent">نیچ‌یاب</span> پیج</h1>
+  <p class="sub">چند تا سوال ساده — تهش یه نیچ مشخص داری که از همون فردا می‌تونی باهاش محتوا بسازی.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- INTRO: what is niche -->
+  <section class="card intro">
+    <h2>اول بفهمیم نیچ اصلاً چیه</h2>
+    <p class="desc">
+      نیچ یعنی حوزه‌ی مشخصی که پیجت حول اون می‌چرخه — یه <b>قول به مخاطبت</b> که هر بار میاد، بدونه قراره چی ازت بگیره. همین قوله که باعث می‌شه بمونه و فالو کنه.
+    </p>
+    <div class="note">
+      <b>حواست باشه: موضوع داشتن با نیچ داشتن فرق داره.</b><br>
+      یه پیج آشپزی «موضوع» داره، ولی آشپزی انقد گنده‌ست که در عمل مثل بی‌نیچیه: یه روز کیک، یه روز خورش، یه روز فست‌فود. اونی که واسه کیک اومده، با خورش می‌ره.
+    </div>
+    <p class="desc">نیچ واقعی <b>سه‌تا لایه</b> داره:</p>
+    <ul class="diff-list">
+      <li><b>موضوع</b> — راجع به چی حرف می‌زنی.</li>
+      <li><b>وجه تمایز</b> — چی تو رو از بقیه‌ای که همون موضوعو کار می‌کنن جدا می‌کنه. آشپزی ← «آشپزی ارزون دانشجویی». ادیت ← «ادیت فقط با موبایل».</li>
+      <li><b>مخاطب</b> — به کی کمک می‌کنی. هرچی دقیق‌تر، بهتر. «همه» یعنی هیچ‌کس.</li>
+    </ul>
+    <p class="desc" style="margin-top:14px;margin-bottom:0">
+      قرار نیست همین الان بهترین نیچ دنیا رو پیدا کنی — قراره <b>بهترین نقطه‌ی شروع خودتو</b> پیدا کنی. هرچی محتوا بسازی و بازخورد بگیری، شفاف‌تر می‌شه. پس فقط صادق باش و بنویس. بریم.
+    </p>
+  </section>
+
+  <!-- LAYER 1 -->
+  <section class="card">
+    <div class="layer-tab">
+      <div class="piece">
+        <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+          <path d="M20 10h25c0 0-3 8 5 8s5-8 5-8h25v25c0 0-8-3-8 5s8 5 8 5v25H55c0 0 3 8-5 8s-5-8-5-8H20V45c0 0 8 3 8-5s-8-5-8-5V10z" fill="#11302E"/>
+          <text x="46" y="60" text-anchor="middle" fill="#fff" font-size="34" font-family="Lalezar">۱</text>
+        </svg>
+      </div>
+      <span class="layer-label">لایه ۱</span>
+    </div>
+    <h2>موضوع — <span class="q">«چی؟»</span></h2>
+    <p class="desc">این همون چیزیه که داری یاد می‌دی، نشون می‌دی، یا راجع بهش حرف می‌زنی. قلب پیجته.</p>
+
+    <div class="q-block">
+      <div class="q-title">۱. مردم معمولاً برای چی میان سراغت؟</div>
+      <div class="q-hint">تو دایرکت، زیر پستا، یا تو زندگی واقعی — بیشتر چی ازت می‌پرسن؟</div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-title">۲. اگه هیچ پولی در کار نبود، بازم راجع به چی محتوا می‌ساختی؟</div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-title">۳. چه کاری بلدی که یه قدم از بقیه جلوتری؟</div>
+      <div class="q-hint">نه بهترینِ دنیا — فقط یه قدم جلوتر از کسی که تازه می‌خواد شروع کنه.</div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="result-line">
+      <div class="q-title">حالا به این سه‌تا جواب نگاه کن. یه موضوع مشترک توشون می‌بینی؟ همون احتمالاً موضوعته:</div>
+      <textarea id="topic" rows="1" placeholder="موضوع من..."></textarea>
+    </div>
+  </section>
+
+  <!-- LAYER 2 -->
+  <section class="card">
+    <div class="layer-tab">
+      <div class="piece">
+        <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+          <path d="M20 10h25c0 0-3 8 5 8s5-8 5-8h25v25c0 0-8-3-8 5s8 5 8 5v25H55c0 0 3 8-5 8s-5-8-5-8H20V45c0 0 8 3 8-5s-8-5-8-5V10z" fill="#C9A24B"/>
+          <text x="46" y="60" text-anchor="middle" fill="#0B211F" font-size="34" font-family="Lalezar">۲</text>
+        </svg>
+      </div>
+      <span class="layer-label">لایه ۲</span>
+    </div>
+    <h2>وجه تمایز — <span class="q">«چی تو رو خاص می‌کنه؟»</span></h2>
+    <p class="desc">
+      هزار نفر همون موضوعِ تو رو کار می‌کنن. این لایه مشخص می‌کنه چرا باید <b>تو</b> رو ببینن، نه اون هزار نفرو. تمایزت می‌تونه از هر کدوم اینا بیاد — یکی‌ش کافیه:
+    </p>
+    <ul class="diff-list">
+      <li><b>زاویه‌ی خاص:</b> یه برشِ مشخص از موضوع — آشپزی ← آشپزی <b>ارزون و دانشجویی</b> یا <b>شیرینی خونگی بدون فر</b></li>
+      <li><b>ابزار یا روش خاص:</b> با چی کار می‌کنی که بقیه نمی‌کنن — ادیت ← ادیت <b>فقط با موبایل</b></li>
+      <li><b>سبک و لحن:</b> چه‌جوری می‌گی که مالِ خودته — طنز؟ خیلی ساده؟ خیلی فنی؟</li>
+    </ul>
+
+    <div class="q-block">
+      <div class="q-title">۱. اگه بخوای موضوعتو یه برشِ مشخص بزنی که مالِ خودت بشه، اون برش چیه؟</div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-title">۲. کاری که تو می‌کنی، با بقیه‌ی کسایی که همین موضوعو کار می‌کنن چه فرقی داره؟</div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="result-line">
+      <div class="q-title">وجه تمایز من:</div>
+      <textarea id="diff" rows="1" placeholder="چیزی که منو جدا می‌کنه..."></textarea>
+    </div>
+  </section>
+
+  <!-- LAYER 3 -->
+  <section class="card">
+    <div class="layer-tab">
+      <div class="piece">
+        <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+          <path d="M20 10h25c0 0-3 8 5 8s5-8 5-8h25v25c0 0-8-3-8 5s8 5 8 5v25H55c0 0 3 8-5 8s-5-8-5-8H20V45c0 0 8 3 8-5s-8-5-8-5V10z" fill="#11302E"/>
+          <text x="46" y="60" text-anchor="middle" fill="#fff" font-size="34" font-family="Lalezar">۳</text>
+        </svg>
+      </div>
+      <span class="layer-label">لایه ۳</span>
+    </div>
+    <h2>مخاطب — <span class="q">«برای کی؟»</span></h2>
+    <p class="desc">اینجا مشخص می‌کنی داری با کی حرف می‌زنی. هرچی دقیق‌تر، بهتر. <b>«همه» یعنی هیچ‌کس.</b></p>
+
+    <div class="q-block">
+      <div class="q-title">۱. دوست داری چه آدمایی پیجتو فالو کنن؟</div>
+      <div class="q-hint">یکی دوتا انتخاب کن، نه همه رو. مثلاً:</div>
+      <div class="chips">
+        <span class="chip">صاحب کسب‌وکار کوچیک</span>
+        <span class="chip">دانشجو</span>
+        <span class="chip">تازه‌کارِ تولید محتوا</span>
+        <span class="chip">مادر</span>
+        <span class="chip">ورزشکار</span>
+        <span class="chip">فریلنسر</span>
+      </div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-title">۲. بزرگ‌ترین مشکل این آدم چیه؟</div>
+      <textarea rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-title">۳. اگه فقط یه مشکلشو می‌تونستی حل کنی، کدوم بود؟</div>
+      <textarea id="problem" rows="2" placeholder="اینجا بنویس..."></textarea>
+    </div>
+
+    <div class="result-line">
+      <div class="q-title">مخاطب من:</div>
+      <textarea id="audience" rows="1" placeholder="آدمایی که می‌خوام کمکشون کنم..."></textarea>
+    </div>
+  </section>
+
+  <!-- STAY TEST -->
+  <section class="card">
+    <h2>تست ماندگاری</h2>
+    <p class="desc">قبل از اینکه بریم جلو، یه چک مهم:<br><b>اگه مجبور باشی ۶ ماهِ تمام فقط راجع به همین موضوع محتوا بسازی، بازم انتخابش می‌کنی؟</b></p>
+    <div class="check-row">
+      <label class="check-opt" data-val="yes">
+        <input type="checkbox">
+        <span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        آره، حاضرم
+      </label>
+      <label class="check-opt" data-val="no">
+        <input type="checkbox">
+        <span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        نه، خسته می‌شم
+      </label>
+    </div>
+    <div class="check-warn" id="stayWarn">
+      برگرد به لایه ۱. موضوعی که شش ماه نتونی باهاش بمونی، نیچ تو نیست — هرچقدرم پرطرفدار باشه.
+    </div>
+  </section>
+
+  <!-- CONTENT TEST -->
+  <section class="card">
+    <h2>تست محتوا</h2>
+    <p class="desc">یه تست سریع که بفهمی نیچت به‌قدر کافی جون داره یا نه.<br><b>همین الان، بدون فکر کردن، ۱۰ تا ایده‌ی محتوا برای این نیچ بنویس:</b></p>
+    <div class="ideas">
+      <div class="idea"><span class="n">۱</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۶</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۲</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۷</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۳</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۸</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۴</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۹</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۵</span><textarea rows="1"></textarea></div>
+      <div class="idea"><span class="n">۱۰</span><textarea rows="1"></textarea></div>
+    </div>
+    <div class="note" style="margin-top:20px">
+      اگه راحت به ۱۰ تا رسیدی، نیچت جون داره. اگه سرِ ۴-۵ تا گیر کردی، یا خیلی باریکش کردی، یا هنوز به‌قدر کافی نمی‌شناسیش. یه‌کم بازترش کن و دوباره امتحان کن.
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="card summary-card">
+    <h2>جمع‌بندی | نیچ خام تو</h2>
+    <p class="desc">حالا سه‌تا لایه رو کنار هم بذار و این جمله رو کامل کن:</p>
+    <div class="sentence">
+      پیج من به
+      <input id="s-audience" placeholder="مخاطب"><span class="lbl">(مخاطب)</span>
+      کمک می‌کنه که
+      <input id="s-problem" placeholder="مشکل / نتیجه"><span class="lbl">(مشکل/نتیجه)</span>
+      از طریق
+      <input id="s-how" placeholder="موضوع + وجه تمایز"><span class="lbl">(موضوع + تمایز)</span>.
+    </div>
+    <div class="example">
+      مثال: پیج من به تازه‌کارای تولید محتوا کمک می‌کنه که ویدیوهای بهتری بسازن، از طریق آموزش ادیت با موبایل به‌صورت اسکرین‌رکورد.
+    </div>
+    <button class="btn" id="copyBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="12" height="12" rx="2" stroke="#16262E" stroke-width="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="#16262E" stroke-width="2"/></svg>
+      کپی نیچ من
+    </button>
+    <div class="copied-msg" id="copiedMsg">کپی شد! بذارش تو بیو، تو نوت گوشیت، یه‌جا جلو چشمت.</div>
+  </section>
+
+  <!-- OUTRO -->
+  <section class="card outro">
+    <h2>و آخرش، یه چیزو یادت باشه…</h2>
+    <p>نیچ قرار نیست محدودت کنه. خیلیا می‌ترسن نیچ انتخاب کنن چون فکر می‌کنن دستشون بسته می‌شه — ولی برعکسه.</p>
+    <p>نیچ فقط بهت <b>مسیر</b> می‌ده. بهت می‌گه فردا چی بسازی، با کی حرف بزنی، و چطوری بگی — به‌جای اینکه هر روز از صفر گیج باشی که «حالا چی بذارم؟».</p>
+    <p>و از همه مهم‌تر، باعث می‌شه آدما <b>راحت‌تر پیدات کنن</b>. وقتی پیجت یه چیز مشخصو می‌گه، اونایی که دنبال همون‌ان می‌فهمن جاشون اینجاست — می‌مونن، فالو می‌کنن، و به بقیه هم معرفیت می‌کنن.</p>
+    <p style="margin-bottom:0">این جمله‌ای که نوشتی، نیچ خام توئه. کامل نیست، قرارم نیست باشه. برو باهاش محتوا بساز. بعد از ۲۰-۳۰ تا محتوا برگرد و دوباره پرش کن — می‌بینی چقدر دقیق‌تر شده.</p>
+    <div class="print-bar">
+      <button class="btn ghost" onclick="window.print()">ذخیره / پرینت کاربرگ</button>
+    </div>
+  </section>
+
+  <footer>
+    تکه ۱ از ۳۰ · چالش ۳۰ تکه از پازل تولید محتوا<br>
+    <span class="brand">aria.fotouhi</span>
+  </footer>
+</div>
+
+<script>
+  // auto-grow textareas
+  document.querySelectorAll('textarea').forEach(t=>{
+    t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';});
+  });
+
+  // stay test: exclusive checkboxes + warning
+  const opts=document.querySelectorAll('.check-opt');
+  const warn=document.getElementById('stayWarn');
+  opts.forEach(opt=>{
+    opt.addEventListener('click',e=>{
+      e.preventDefault();
+      const wasChecked=opt.classList.contains('checked');
+      opts.forEach(o=>o.classList.remove('checked'));
+      if(!wasChecked)opt.classList.add('checked');
+      warn.classList.toggle('show',opt.dataset.val==='no'&&opt.classList.contains('checked'));
+    });
+  });
+
+  // pre-fill summary from layer results
+  const map=[['audience','s-audience'],['problem','s-problem']];
+  map.forEach(([src,dst])=>{
+    const s=document.getElementById(src),d=document.getElementById(dst);
+    s.addEventListener('input',()=>{if(!d.dataset.touched)d.value=s.value;});
+    d.addEventListener('input',()=>{d.dataset.touched='1';});
+  });
+  const topic=document.getElementById('topic'),diff=document.getElementById('diff'),how=document.getElementById('s-how');
+  function fillHow(){
+    if(how.dataset.touched)return;
+    const t=topic.value.trim(),df=diff.value.trim();
+    how.value=[t,df].filter(Boolean).join(' — ');
+  }
+  topic.addEventListener('input',fillHow);
+  diff.addEventListener('input',fillHow);
+  how.addEventListener('input',()=>{how.dataset.touched='1';});
+
+  // copy niche sentence
+  document.getElementById('copyBtn').addEventListener('click',()=>{
+    const a=document.getElementById('s-audience').value.trim()||'ــــ';
+    const p=document.getElementById('s-problem').value.trim()||'ــــ';
+    const h=document.getElementById('s-how').value.trim()||'ــــ';
+    const text=`پیج من به ${a} کمک می‌کنه که ${p}، از طریق ${h}.`;
+    const ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    if(navigator.clipboard){navigator.clipboard.writeText(text).catch(()=>{});}
+    document.getElementById('copiedMsg').classList.add('show');
+    setTimeout(()=>document.getElementById('copiedMsg').classList.remove('show'),3000);
+  });
+</script>
+</body>
+</html>
